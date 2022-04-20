@@ -28,7 +28,7 @@ install directions:
    
    
 run:
-   sudo python3 /home/mycroft/PCBtests/precise_test.py
+   sudo python3 test_audio-output-input.py
 """
 
 from precise_runner import PreciseEngine, PreciseRunner

@@ -1,8 +1,10 @@
 """
-install:
+Test operation of the TAS5806 amplifier.
+
+Requirements:
     pip3 install smbus2
 
-run:
+Run:
     python3 tas5806Test.py
 """
 from smbus2 import SMBus

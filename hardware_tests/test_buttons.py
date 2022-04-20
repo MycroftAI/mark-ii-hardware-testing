@@ -1,10 +1,11 @@
 """
-sudo apt-get update && sudo apt-get install python3-gpiozero python-gpiozero
+Test the physical hardware buttons and mic mute switch on the SJ201.
 
+Requirements:
+    sudo apt-get update && sudo apt-get install python3-gpiozero python-gpiozero
 
-run with:
-sudo python3 gpiotest.py
-
+Run:
+    sudo python3 test_buttons.py
 """
 
 from gpiozero import Button
