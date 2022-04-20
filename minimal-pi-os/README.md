@@ -23,4 +23,4 @@ Contains pre-built kernel module from [XMOS source](https://github.com/xmos/voca
     * Run `./start-xmos.sh` after each boot
     * Maybe add `@reboot /home/pi/start-xmos.sh` to crontab? 
 
-[1] https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-04-07/2022-04-04-raspios-bullseye-armhf-lite.img.xz
+[1] https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-04-07/2022-04-04-raspios-bullseye-arm64-lite.img.xz
