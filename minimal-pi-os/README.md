@@ -1,4 +1,4 @@
-# Minimal Mark II with Raspberry Pi oscillate
+# Minimal Mark II with Raspberry Pi OS
 
 Setup script and pre-compiled binaries for using Mark II microphone and speaker in Raspberry Pi OS Lite 64-bit (bullseye).
 
