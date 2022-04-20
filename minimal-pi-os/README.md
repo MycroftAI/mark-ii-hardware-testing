@@ -5,10 +5,10 @@ Setup script and pre-compiled binaries for using Mark II microphone and speaker 
 Contains pre-built kernel module from [XMOS source](https://github.com/xmos/vocalfusion-rpi-setup).
 
 1. Install Raspbery Pi OS Lite 64-bit based on bullseye [1]
-    * After burning image:
+    * After burning image run `./os_setup_1.sh` to:
         * Copy userconf.txt to /boot (user=pi, password=raspberry)
         * Add an empty file named ssh to /boot (enable SSH)
-    * `uname -a` should yield `Linux raspberrypi 5.15.32-v8+ #1538 SMP PREEMPT Thu Mar 31 19:40:39 BST 2022 aarch64 GNU/Linux`
+    * After booting the OS `uname -a` should yield `Linux raspberrypi 5.15.32-v8+ #1538 SMP PREEMPT Thu Mar 31 19:40:39 BST 2022 aarch64 GNU/Linux`
 2. Enable hardware
     * On device, run `sudo raspi-config` and enable I2C & SPI in Interface Options
     * Reboot
