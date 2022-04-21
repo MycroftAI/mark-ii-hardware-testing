@@ -4,8 +4,8 @@ set -ex
 VENV='venv'
 
 if [ ! -d "${VENV}" ]; then
-    python3 -m venv "${VENV}"
-    "${VENV}/bin/pip3" install --system-site-packages -r requirements.txt
+    python3 -m venv --system-site-packages "${VENV}"
+    "${VENV}/bin/pip3" install -r requirements.txt
 fi
 
 source "${VENV}/bin/activate"
