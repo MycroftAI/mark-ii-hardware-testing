@@ -14,14 +14,12 @@ Contains pre-built kernel module from [XMOS source](https://github.com/xmos/voca
 2. Enable hardware
     * On device, run `sudo raspi-config` and enable I2C & SPI in Interface Options
     * Reboot
-3. After rebooting, on device run `./os_setup_1.sh` to:
+3. After rebooting, on device run `./os_setup_2.sh` to:
     * Install system packages
         * `sudo apt-get update`
         * `sudo apt-get install --yes python3 python3-venv python3-pip`
     * Install python requirements
         * `pip3 install -r requirements.txt`
-4. Run script
     * Run `./start-xmos.sh` after each boot
-    * Maybe add `@reboot /home/pi/start-xmos.sh` to crontab? 
 
 [1] https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-04-07/2022-04-04-raspios-bullseye-arm64-lite.img.xz
