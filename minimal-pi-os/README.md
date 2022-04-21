@@ -8,18 +8,19 @@ Contains pre-built kernel module from [XMOS source](https://github.com/xmos/voca
     * After burning image run `./os_setup_1.sh` to:
         * Copy userconf.txt to /boot (user=pi, password=raspberry)
         * Add an empty file named ssh to /boot (enable SSH)
+        * Copy contents of `usr` directory to `/usr`
+        * Copy contents of `home/pi` to `/home/pi`
     * After booting the OS `uname -a` should yield `Linux raspberrypi 5.15.32-v8+ #1538 SMP PREEMPT Thu Mar 31 19:40:39 BST 2022 aarch64 GNU/Linux`
 2. Enable hardware
     * On device, run `sudo raspi-config` and enable I2C & SPI in Interface Options
     * Reboot
-3. Install packages
-    * `sudo apt-get update`
-    * `sudo apt-get install --yes python3 python3-venv python3-pip`
-4. Copy binaries/libraries
-    * Copy contents of `usr` directory to `/usr`
-5. Copy script and files
-    * Copy contents of `home/pi` to `/home/pi`
-6. Run script
+3. After rebooting, on device run `./os_setup_1.sh` to:
+    * Install system packages
+        * `sudo apt-get update`
+        * `sudo apt-get install --yes python3 python3-venv python3-pip`
+    * Install python requirements
+        * `pip3 install -r requirements.txt`
+4. Run script
     * Run `./start-xmos.sh` after each boot
     * Maybe add `@reboot /home/pi/start-xmos.sh` to crontab? 
 
