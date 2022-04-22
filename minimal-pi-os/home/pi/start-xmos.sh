@@ -10,7 +10,7 @@ fi
 
 source "${VENV}/bin/activate"
 
-sh vocalfusion-rpi-setup/resources/load_i2s_driver.sh
+sh vocalfusion-rpi-setup/resources/load_i2s_driver.sh || true
 
 sudo setup_mclk
 sudo setup_bclk
