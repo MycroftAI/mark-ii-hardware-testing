@@ -11,15 +11,10 @@ Contains pre-built kernel module from [XMOS source](https://github.com/xmos/voca
         * Copy contents of `usr` directory to `/usr`
         * Copy contents of `home/pi` to `/home/pi`
     * After booting the OS `uname -a` should yield `Linux raspberrypi 5.15.32-v8+ #1538 SMP PREEMPT Thu Mar 31 19:40:39 BST 2022 aarch64 GNU/Linux`
-2. Enable hardware
+2. On device run `./os_setup_2.sh`
+3. Enable hardware
     * On device, run `sudo raspi-config` and enable I2C & SPI in Interface Options
-    * Reboot
-3. After rebooting, on device run `./os_setup_2.sh` to:
-    * Install system packages
-        * `sudo apt-get update`
-        * `sudo apt-get install --yes python3 python3-venv python3-pip`
-    * Install python requirements
-        * `pip3 install -r requirements.txt`
-    * Run `./start-xmos.sh` after each boot
+    * Reboot or shutdown
+4. On subsequent boots, tests will autorun
 
 [1] https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-04-07/2022-04-04-raspios-bullseye-arm64-lite.img.xz

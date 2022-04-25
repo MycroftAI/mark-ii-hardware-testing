@@ -1,8 +1,10 @@
-cmd_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o := gcc -Wp,-MMD,/home/pi/vocalfusion-rpi-setup/loader/i2s_master/.i2s_master_loader.o.d -nostdinc -isystem /usr/lib/gcc/aarch64-linux-gnu/10/include -I./arch/arm64/include -I./arch/arm64/include/generated  -I./include -I./arch/arm64/include/uapi -I./arch/arm64/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -mlittle-endian -DCC_USING_PATCHABLE_FUNCTION_ENTRY -DKASAN_SHADOW_SCALE_SHIFT= -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mgeneral-regs-only -DCONFIG_CC_HAS_K_CONSTRAINT=1 -Wno-psabi -mabi=lp64 -fno-asynchronous-unwind-tables -fno-unwind-tables -mbranch-protection=pac-ret+leaf+bti -Wa,-march=armv8.5-a -DARM64_ASM_ARCH='"armv8.5-a"' -DKASAN_SHADOW_SCALE_SHIFT= -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 -fno-allow-store-data-races -Wframe-larger-than=2048 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -fpatchable-function-entry=2 -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-zero-length-bounds -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -mstack-protector-guard=sysreg -mstack-protector-guard-reg=sp_el0 -mstack-protector-guard-offset=1344  -DMODULE -DRPI_4B -DI2S_MASTER -DKBUILD_BASENAME='"i2s_master_loader"' -DKBUILD_MODNAME='"i2s_master_loader"' -D__KBUILD_MODNAME=kmod_i2s_master_loader -c -o /home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o /home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.c
+cmd_/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o := gcc -Wp,-MMD,/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/.i2s_master_loader.mod.o.d -nostdinc -isystem /usr/lib/gcc/aarch64-linux-gnu/10/include -I./arch/arm64/include -I./arch/arm64/include/generated -I./include -I./arch/arm64/include/uapi -I./arch/arm64/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -mlittle-endian -DCC_USING_PATCHABLE_FUNCTION_ENTRY -DKASAN_SHADOW_SCALE_SHIFT= -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mgeneral-regs-only -DCONFIG_CC_HAS_K_CONSTRAINT=1 -Wno-psabi -mabi=lp64 -fno-asynchronous-unwind-tables -fno-unwind-tables -mbranch-protection=pac-ret+leaf+bti -Wa,-march=armv8.5-a -DARM64_ASM_ARCH='"armv8.5-a"' -DKASAN_SHADOW_SCALE_SHIFT= -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 -fno-allow-store-data-races -Wframe-larger-than=2048 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -fpatchable-function-entry=2 -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-zero-length-bounds -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -mstack-protector-guard=sysreg -mstack-protector-guard-reg=sp_el0 -mstack-protector-guard-offset=1344 -DMODULE -DRPI_4B -DI2S_MASTER -DKBUILD_BASENAME='"i2s_master_loader.mod"' -DKBUILD_MODNAME='"i2s_master_loader"' -D__KBUILD_MODNAME=kmod_i2s_master_loader -c -o /home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o /home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.c
 
-source_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o := /home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.c
+source_/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o := /home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.c
 
-deps_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o := \
+deps_/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o := \
+    $(wildcard include/config/MODULE_UNLOAD) \
+    $(wildcard include/config/RETPOLINE) \
   include/linux/compiler-version.h \
     $(wildcard include/config/CC_VERSION_TEXT) \
   include/linux/kconfig.h \
@@ -14,7 +16,6 @@ deps_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o := \
     $(wildcard include/config/CC_HAS_ASM_INLINE) \
   include/linux/compiler_attributes.h \
   include/linux/compiler-gcc.h \
-    $(wildcard include/config/RETPOLINE) \
     $(wildcard include/config/ARCH_USE_BUILTIN_BSWAP) \
     $(wildcard include/config/KCOV) \
   arch/arm64/include/asm/compiler.h \
@@ -40,7 +41,6 @@ deps_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o := \
     $(wildcard include/config/KPROBES) \
     $(wildcard include/config/HAVE_STATIC_CALL_INLINE) \
     $(wildcard include/config/PRINTK_INDEX) \
-    $(wildcard include/config/MODULE_UNLOAD) \
     $(wildcard include/config/CONSTRUCTORS) \
     $(wildcard include/config/FUNCTION_ERROR_INJECTION) \
   include/linux/list.h \
@@ -867,273 +867,14 @@ deps_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o := \
     $(wildcard include/config/HAVE_MOD_ARCH_SPECIFIC) \
     $(wildcard include/config/MODULES_USE_ELF_REL) \
     $(wildcard include/config/MODULES_USE_ELF_RELA) \
-  include/linux/platform_device.h \
-    $(wildcard include/config/SUSPEND) \
-    $(wildcard include/config/HIBERNATE_CALLBACKS) \
-    $(wildcard include/config/SUPERH) \
-  include/linux/device.h \
-    $(wildcard include/config/ENERGY_MODEL) \
-    $(wildcard include/config/GENERIC_MSI_IRQ_DOMAIN) \
-    $(wildcard include/config/PINCTRL) \
-    $(wildcard include/config/GENERIC_MSI_IRQ) \
-    $(wildcard include/config/DMA_OPS) \
-    $(wildcard include/config/DMA_DECLARE_COHERENT) \
-    $(wildcard include/config/DMA_CMA) \
-    $(wildcard include/config/SWIOTLB) \
-    $(wildcard include/config/ARCH_HAS_SYNC_DMA_FOR_DEVICE) \
-    $(wildcard include/config/ARCH_HAS_SYNC_DMA_FOR_CPU) \
-    $(wildcard include/config/ARCH_HAS_SYNC_DMA_FOR_CPU_ALL) \
-    $(wildcard include/config/DMA_OPS_BYPASS) \
-    $(wildcard include/config/OF) \
-    $(wildcard include/config/DEVTMPFS) \
-    $(wildcard include/config/SYSFS_DEPRECATED) \
-  include/linux/dev_printk.h \
-  include/linux/energy_model.h \
-  include/linux/sched/cpufreq.h \
-    $(wildcard include/config/CPU_FREQ) \
-  include/linux/sched/topology.h \
-    $(wildcard include/config/SCHED_DEBUG) \
-    $(wildcard include/config/SCHED_MC) \
-    $(wildcard include/config/CPU_FREQ_GOV_SCHEDUTIL) \
-  include/linux/sched/idle.h \
-  include/linux/sched/sd_flags.h \
-  include/linux/ioport.h \
-  include/linux/klist.h \
-  include/linux/pm.h \
-    $(wildcard include/config/VT_CONSOLE_SLEEP) \
-    $(wildcard include/config/PM) \
-    $(wildcard include/config/PM_CLK) \
-    $(wildcard include/config/PM_GENERIC_DOMAINS) \
-  include/linux/overflow.h \
-  include/linux/device/bus.h \
-    $(wildcard include/config/ACPI) \
-  include/linux/device/class.h \
-  include/linux/device/driver.h \
-  arch/arm64/include/asm/device.h \
-  include/linux/pm_wakeup.h \
-  include/sound/simple_card.h \
-  include/sound/soc.h \
-    $(wildcard include/config/SND_SOC_COMPRESS) \
-    $(wildcard include/config/DMI) \
-    $(wildcard include/config/SND_SOC_AC97_BUS) \
-    $(wildcard include/config/SND_SOC_TOPOLOGY) \
-    $(wildcard include/config/DEBUG_FS) \
-  include/linux/of.h \
-    $(wildcard include/config/OF_DYNAMIC) \
-    $(wildcard include/config/SPARC) \
-    $(wildcard include/config/OF_PROMTREE) \
-    $(wildcard include/config/OF_KOBJ) \
-    $(wildcard include/config/OF_NUMA) \
-    $(wildcard include/config/OF_OVERLAY) \
-  include/linux/mod_devicetable.h \
-  include/linux/property.h \
-  include/linux/fwnode.h \
-  include/linux/interrupt.h \
-    $(wildcard include/config/IRQ_FORCED_THREADING) \
-    $(wildcard include/config/GENERIC_IRQ_PROBE) \
-    $(wildcard include/config/IRQ_TIMINGS) \
-  include/linux/irqreturn.h \
-  include/linux/hardirq.h \
-  include/linux/context_tracking_state.h \
-    $(wildcard include/config/CONTEXT_TRACKING) \
-  include/linux/ftrace_irq.h \
-    $(wildcard include/config/HWLAT_TRACER) \
-    $(wildcard include/config/OSNOISE_TRACER) \
-  include/linux/vtime.h \
-    $(wildcard include/config/VIRT_CPU_ACCOUNTING) \
-    $(wildcard include/config/IRQ_TIME_ACCOUNTING) \
-  arch/arm64/include/asm/hardirq.h \
-  arch/arm64/include/asm/irq.h \
-  include/asm-generic/irq.h \
-  arch/arm64/include/asm/kvm_arm.h \
-  arch/arm64/include/asm/esr.h \
-  include/asm-generic/hardirq.h \
-  include/linux/irq.h \
-    $(wildcard include/config/GENERIC_IRQ_EFFECTIVE_AFF_MASK) \
-    $(wildcard include/config/GENERIC_IRQ_IPI) \
-    $(wildcard include/config/IRQ_DOMAIN_HIERARCHY) \
-    $(wildcard include/config/GENERIC_IRQ_MIGRATION) \
-    $(wildcard include/config/GENERIC_PENDING_IRQ) \
-    $(wildcard include/config/HARDIRQS_SW_RESEND) \
-    $(wildcard include/config/GENERIC_IRQ_LEGACY) \
-    $(wildcard include/config/GENERIC_IRQ_MULTI_HANDLER) \
-  include/linux/irqhandler.h \
-  include/linux/io.h \
-    $(wildcard include/config/HAS_IOPORT_MAP) \
-    $(wildcard include/config/PCI) \
-  arch/arm64/include/asm/io.h \
-  include/linux/pgtable.h \
-    $(wildcard include/config/HIGHPTE) \
-    $(wildcard include/config/GUP_GET_PTE_LOW_HIGH) \
-    $(wildcard include/config/HAVE_ARCH_TRANSPARENT_HUGEPAGE_PUD) \
-    $(wildcard include/config/HAVE_ARCH_SOFT_DIRTY) \
-    $(wildcard include/config/ARCH_ENABLE_THP_MIGRATION) \
-    $(wildcard include/config/ARCH_HAS_PTE_DEVMAP) \
-    $(wildcard include/config/HAVE_ARCH_HUGE_VMAP) \
-    $(wildcard include/config/X86_ESPFIX64) \
-  arch/arm64/include/asm/pgtable.h \
-  arch/arm64/include/asm/proc-fns.h \
-  arch/arm64/include/asm/pgtable-prot.h \
-  arch/arm64/include/asm/tlbflush.h \
-    $(wildcard include/config/ARM64_WORKAROUND_REPEAT_TLBI) \
-  arch/arm64/include/asm/fixmap.h \
-    $(wildcard include/config/ACPI_APEI_GHES) \
-    $(wildcard include/config/ARM_SDE_INTERFACE) \
-    $(wildcard include/config/UNMAP_KERNEL_AT_EL0) \
-  arch/arm64/include/asm/boot.h \
-  include/asm-generic/fixmap.h \
-  include/asm-generic/pgtable_uffd.h \
-    $(wildcard include/config/HAVE_ARCH_USERFAULTFD_WP) \
-  arch/arm64/include/generated/asm/early_ioremap.h \
-  include/asm-generic/early_ioremap.h \
-    $(wildcard include/config/GENERIC_EARLY_IOREMAP) \
-  include/asm-generic/io.h \
-    $(wildcard include/config/GENERIC_IOMAP) \
-    $(wildcard include/config/GENERIC_IOREMAP) \
-    $(wildcard include/config/VIRT_TO_BUS) \
-    $(wildcard include/config/GENERIC_DEVMEM_IS_ALLOWED) \
-  include/asm-generic/pci_iomap.h \
-    $(wildcard include/config/NO_GENERIC_PCI_IOPORT_MAP) \
-    $(wildcard include/config/GENERIC_PCI_IOMAP) \
-  include/linux/logic_pio.h \
-    $(wildcard include/config/INDIRECT_PIO) \
-  include/linux/vmalloc.h \
-    $(wildcard include/config/KASAN_VMALLOC) \
-    $(wildcard include/config/HAVE_ARCH_HUGE_VMALLOC) \
-  arch/arm64/include/asm/vmalloc.h \
-    $(wildcard include/config/PTDUMP_DEBUGFS) \
-  include/linux/slab.h \
-    $(wildcard include/config/DEBUG_SLAB) \
-    $(wildcard include/config/FAILSLAB) \
-    $(wildcard include/config/HAVE_HARDENED_USERCOPY_ALLOCATOR) \
-    $(wildcard include/config/SLAB) \
-    $(wildcard include/config/SLUB) \
-    $(wildcard include/config/SLOB) \
-    $(wildcard include/config/CC_IS_GCC) \
-    $(wildcard include/config/CLANG_VERSION) \
-  include/linux/percpu-refcount.h \
-  include/linux/kasan.h \
-    $(wildcard include/config/KASAN_STACK) \
-    $(wildcard include/config/KASAN_INLINE) \
-  arch/arm64/include/generated/asm/irq_regs.h \
-  include/asm-generic/irq_regs.h \
-  include/linux/irqdesc.h \
-    $(wildcard include/config/GENERIC_IRQ_DEBUGFS) \
-    $(wildcard include/config/SPARSE_IRQ) \
-    $(wildcard include/config/IRQ_DOMAIN) \
-    $(wildcard include/config/HANDLE_DOMAIN_IRQ) \
-  arch/arm64/include/generated/asm/hw_irq.h \
-  include/asm-generic/hw_irq.h \
-  include/linux/regmap.h \
-    $(wildcard include/config/REGMAP) \
-  include/linux/delay.h \
-  arch/arm64/include/generated/asm/delay.h \
-  include/asm-generic/delay.h \
-  include/linux/iopoll.h \
-  include/sound/core.h \
-    $(wildcard include/config/SND_DYNAMIC_MINORS) \
-    $(wildcard include/config/SND_MAX_CARDS) \
-    $(wildcard include/config/SND_MAJOR) \
-    $(wildcard include/config/SND_DEBUG) \
-    $(wildcard include/config/SND_MIXER_OSS) \
-    $(wildcard include/config/SND_OSSEMUL) \
-    $(wildcard include/config/ISA_DMA_API) \
-    $(wildcard include/config/SND_VERBOSE_PRINTK) \
-    $(wildcard include/config/SND_DEBUG_VERBOSE) \
-    $(wildcard include/config/GAMEPORT) \
-  include/sound/pcm.h \
-    $(wildcard include/config/SND_PCM_OSS) \
-    $(wildcard include/config/SND_VERBOSE_PROCFS) \
-    $(wildcard include/config/SND_PCM_XRUN_DEBUG) \
-    $(wildcard include/config/X86) \
-    $(wildcard include/config/PPC) \
-  include/sound/asound.h \
-  include/uapi/sound/asound.h \
-  include/sound/memalloc.h \
-    $(wildcard include/config/SND_DMA_SGBUF) \
-    $(wildcard include/config/GENERIC_ALLOCATOR) \
-  include/sound/minors.h \
-  include/linux/poll.h \
-  include/uapi/linux/poll.h \
-  arch/arm64/include/generated/uapi/asm/poll.h \
-  include/uapi/asm-generic/poll.h \
-  include/uapi/linux/eventpoll.h \
-  include/linux/mm.h \
-    $(wildcard include/config/HAVE_ARCH_MMAP_RND_BITS) \
-    $(wildcard include/config/HAVE_ARCH_MMAP_RND_COMPAT_BITS) \
-    $(wildcard include/config/DEBUG_INFO_BTF) \
-    $(wildcard include/config/MEM_SOFT_DIRTY) \
-    $(wildcard include/config/ARCH_USES_HIGH_VMA_FLAGS) \
-    $(wildcard include/config/ARCH_HAS_PKEYS) \
-    $(wildcard include/config/PARISC) \
-    $(wildcard include/config/SPARC64) \
-    $(wildcard include/config/HAVE_ARCH_USERFAULTFD_MINOR) \
-    $(wildcard include/config/SHMEM) \
-    $(wildcard include/config/DEV_PAGEMAP_OPS) \
-    $(wildcard include/config/DEVICE_PRIVATE) \
-    $(wildcard include/config/PCI_P2PDMA) \
-    $(wildcard include/config/ARCH_HAS_PTE_SPECIAL) \
-    $(wildcard include/config/DEBUG_VM_RB) \
-    $(wildcard include/config/PAGE_POISONING) \
-    $(wildcard include/config/INIT_ON_ALLOC_DEFAULT_ON) \
-    $(wildcard include/config/INIT_ON_FREE_DEFAULT_ON) \
-    $(wildcard include/config/DEBUG_PAGEALLOC) \
-    $(wildcard include/config/HUGETLBFS) \
-    $(wildcard include/config/MAPPING_DIRTY_HELPERS) \
-  include/linux/mmap_lock.h \
-  include/linux/range.h \
-  include/linux/page_ext.h \
-  include/linux/stacktrace.h \
-    $(wildcard include/config/STACKTRACE) \
-    $(wildcard include/config/ARCH_STACKWALK) \
-    $(wildcard include/config/HAVE_RELIABLE_STACKTRACE) \
-  include/linux/stackdepot.h \
-    $(wildcard include/config/STACKDEPOT) \
-  include/linux/page_ref.h \
-    $(wildcard include/config/DEBUG_PAGE_REF) \
-  include/linux/memremap.h \
-  include/linux/huge_mm.h \
-  include/linux/sched/coredump.h \
-    $(wildcard include/config/CORE_DUMP_DEFAULT_ELF_HEADERS) \
-  include/linux/vmstat.h \
-    $(wildcard include/config/VM_EVENT_COUNTERS) \
-    $(wildcard include/config/DEBUG_TLBFLUSH) \
-    $(wildcard include/config/DEBUG_VM_VMACACHE) \
-  include/linux/vm_event_item.h \
-    $(wildcard include/config/MEMORY_BALLOON) \
-    $(wildcard include/config/BALLOON_COMPACTION) \
-  include/linux/pm_qos.h \
-    $(wildcard include/config/CPU_IDLE) \
-  include/sound/pcm_oss.h \
-    $(wildcard include/config/SND_PCM_OSS_PLUGINS) \
-  include/sound/compress_driver.h \
-  include/uapi/sound/compress_offload.h \
-  include/uapi/sound/compress_params.h \
-  include/sound/control.h \
-    $(wildcard include/config/SND_CTL_VALIDATION) \
-    $(wildcard include/config/SND_CTL_LED) \
-  include/linux/nospec.h \
-  include/sound/ac97_codec.h \
-    $(wildcard include/config/SND_AC97_POWER_SAVE) \
-  include/sound/ac97/regs.h \
-  include/sound/info.h \
-    $(wildcard include/config/SND_PROC_FS) \
-  include/linux/seq_file.h \
-  include/sound/soc-dapm.h \
-  include/sound/soc-topology.h \
-  include/uapi/sound/asoc.h \
-  include/sound/soc-dpcm.h \
-  include/sound/soc-dai.h \
-  include/sound/soc-component.h \
-  include/sound/soc-card.h \
-  include/sound/soc-jack.h \
-    $(wildcard include/config/GPIOLIB) \
-  include/sound/simple_card_utils.h \
-  include/linux/clk.h \
-    $(wildcard include/config/COMMON_CLK) \
-    $(wildcard include/config/HAVE_CLK_PREPARE) \
-    $(wildcard include/config/HAVE_CLK) \
+  include/linux/build-salt.h \
+    $(wildcard include/config/BUILD_SALT) \
+  include/linux/elfnote.h \
+  include/linux/elfnote-lto.h \
+  include/linux/vermagic.h \
+  include/generated/utsrelease.h \
+  arch/arm64/include/asm/vermagic.h \
 
-/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o: $(deps_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o)
+/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o: $(deps_/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o)
 
-$(deps_/home/pi/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.o):
+$(deps_/home/pi/xmos/vocalfusion-rpi-setup/loader/i2s_master/i2s_master_loader.mod.o):
