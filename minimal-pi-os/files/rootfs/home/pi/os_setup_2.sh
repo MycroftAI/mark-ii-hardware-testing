@@ -23,11 +23,15 @@ if [ ! -d "${VENV}" ]; then
     "${VENV}/bin/pip3" install -r requirements.txt
 fi
 
-echo "./run-tests.sh" >> $HOME/.bashrc
+echo "./run-tests.sh" >> "$HOME/.bashrc"
 
 echo "To finalize image setup:"
 echo "1. Launch raspi-config"
 echo "2. Select 'Interface Options'"
 echo "3. Enable I2C and SPI"
-echo "4. Delete os_setup_2.sh"
+echo "4. Prepare for packaging:"
+echo "   $ rm os_setup_2.sh"
+echo "   $ sudo apt clean"
+echo "   $ sudo rm /var/lib/apt/lists/*"
+echo "   $ history -c"
 echo "4. Then shutdown."
