@@ -31,12 +31,14 @@ to the device. See HERE for instructions.
 
 2) Git clone the hardware test repository 
 
-    git clone bla
+    git clone https://github.com/MycroftAI/mark-ii-hardware-testing.git
+    cd mark-ii-hardware-testing
+    git checkout bug_fix
 
 
 3) Copy files to the MarkII
 
-    scp -r mark-ii-hardware-testing/* pi@1.2.3.4:/home/pi/.
+    scp -r * pi@1.2.3.4:/home/pi/.
 
 
 3) SSH into the MarkII and run sudo raspi-config
