@@ -36,7 +36,7 @@ to the device. See HERE for instructions.
 
 3) Copy files to the MarkII
 
-    scp -r my_repo_name/* pi@1.2.3.4:/home/pi/.
+    scp -r mark-ii-hardware-testing/* pi@1.2.3.4:/home/pi/.
 
 
 3) SSH into the MarkII and run sudo raspi-config
