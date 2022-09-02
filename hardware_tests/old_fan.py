@@ -1,6 +1,6 @@
 import os
 import subprocess
-import time
+from time import sleep
 
 
 class FanControl:
@@ -87,16 +87,17 @@ class FanControl:
         return float(out.strip()) / 1000
 
 if __name__ == "__main__":
-    print("Starting Fan Test For New Style SJ201")
+    print("Starting Fan Test For Old Style SJ201")
     fc = FanControl()
-    print("Fan speed=%s" % (fc.get_fan_speed(),))
+
+    print("Initial Fan speed=%s" % (fc.get_fan_speed(),))
     fc.set_fan_speed(90)
     print("Fan speed=%s" % (fc.get_fan_speed(),))
     sleep(5)
-    fc.set_fan_speed(50)
+    fc.set_fan_speed(0)
     print("Fan speed=%s" % (fc.get_fan_speed(),))
     sleep(5)
-    fc.set_fan_speed(0)
+    fc.set_fan_speed(50)
     print("Fan speed=%s" % (fc.get_fan_speed(),))
     sleep(5)
 
