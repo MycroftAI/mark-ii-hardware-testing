@@ -56,7 +56,6 @@ class Led(MycroftLed):
         green_val = int(color[1])
         blue_val = int(color[2])
         self.pixels[pixel] = (red_val, green_val, blue_val)
-        self.pixels.show()
 
     def _set_led_with_brightness(self, pixel, color, blevel):
         self._set_led(pixel, list(map(self.adjust_brightness, color, (blevel,) * 3)))
@@ -64,7 +63,7 @@ class Led(MycroftLed):
     def show(self):
         """show buffered leds, only used
         for older slower devices"""
-        pass
+        self.pixels.show()
 
     def set_led(self, pixel, color):
         """external interface enforces led

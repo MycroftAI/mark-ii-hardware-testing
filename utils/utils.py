@@ -79,8 +79,9 @@ class CommandExecutor:
 
 
 class LogicalVolume:
-    def __init__(self, leds, board_type):
+    def __init__(self, leds, board_type, led_color):
         self.leds = leds
+        self.led_color = led_color
         self.board_type = board_type
         self.vol_table = [180,170,160,150,140,130,120,110,100,90,80,70]
         self.current_volume = 6 # index into vol table
@@ -88,7 +89,8 @@ class LogicalVolume:
         fix_cmd(self.board_type, cmd)
 
     def vol_up(self):
-        self.leds._set_led(self.current_volume, (255,0,0))
+        self.leds._set_led(self.current_volume, self.led_color)
+        self.leds.show()
         self.current_volume += 1
         if self.current_volume > 11:
             self.current_volume = 11
@@ -100,10 +102,10 @@ class LogicalVolume:
         if self.current_volume < 0:
             self.current_volume = 0
         self.leds._set_led(self.current_volume, (0,0,0))
+        self.leds.show()
         cmd = "python utils/set_volume_tas5806.py %s" % (self.vol_table[self.current_volume],)
         fix_cmd(self.board_type, cmd)
 
     def close(self):
         pass
-
 

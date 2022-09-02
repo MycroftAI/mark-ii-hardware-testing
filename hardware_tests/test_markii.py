@@ -9,7 +9,9 @@ from detect_markii import EnclosureCapabilities
 from utils.csv_file import write_test_results_to_file
 from utils.utils import CommandExecutor, fix_cmd, LogicalVolume, GREEN, RED, NC
 from utils.async_touch import TouchEvent
-"""MarkII Production Hardware Test Program
+from utils.async_button import AsyncButtons
+"""
+   MarkII Production Hardware Test Program
 
   Goal:  total time < 45 seconds pass or 1 minute worst case fail
 
@@ -21,8 +23,8 @@ from utils.async_touch import TouchEvent
     5) BUTTON TEST
     6) LEDS TEST
     7) MIC TEST
-    8) WRITE TEST REPORT ENTRY """
-
+    8) WRITE TEST REPORT ENTRY
+"""
 sj201_board_types = {
     0:"None",
     1:"Old",
@@ -30,9 +32,119 @@ sj201_board_types = {
     }
 board_type = 0   # will be set later
 
-start_time = time()
+BLACK_LED = (0,0,0)
+RED_LED = (255,0,0)
+GREEN_LED = (0,255,0)
+BLUE_LED = (0,0,255)
+
+activate_button = '24'
+right_button = '22'
+middle_button = '23'
+
+
+def volume_good(m2but, lv):
+    test_passed = False
+    process = Popen(["speaker-test", "-c2", "-twav", "-f2000", "&"])
+
+    to_ctr = 0
+    timeout_in_seconds = 30  # very approximate!
+    while to_ctr < timeout_in_seconds:
+        res = m2but.wait_buttons( [activate_button, right_button, middle_button], 2 )
+
+        if res == activate_button:
+            # activate pressed
+            break
+        elif res == right_button:
+            # vol up pressed
+            lv.vol_up()
+        elif res == middle_button:
+            # vol down pressed
+            lv.vol_down()
+        else:
+            # we timed out
+            to_ctr += 1
+
+        sleep(0.05)
+        to_ctr += 1
+
+    # stop sound
+    process.kill()
+
+    # record what happened
+    if to_ctr < timeout_in_seconds:
+        fix_cmd(board_type, "aplay wavs/did_volume_change.wav")
+        fix_cmd(board_type, "aplay wavs/confirm_yesno.wav &")
+
+        res = m2but.wait_buttons( [right_button,middle_button], 10 )
+        if res == right_button:
+            test_passed = True
+
+    else:
+        #print("Error - volume test timed out!")
+        pass
+
+    return test_passed
+
+
+def fan_good(m2but, fc, led_color, leds):
+    test_passed = False
+    fan_speed = 50
+    led_color = (0,0,255)
+
+    for x in range(6):
+        leds._set_led(x,(0,0,255))
+    leds.show()
+
+    to_ctr = 0
+    timeout_in_seconds = 30  # very approximate!
+    while to_ctr < timeout_in_seconds:
+        res = m2but.wait_buttons( [activate_button, right_button, middle_button], 2 )
+
+        if res == activate_button:
+            # activate pressed
+            break
+        elif res == right_button:
+            # vol up pressed
+            if fan_speed < 100:
+                fan_speed += 10
+                fc.set_fan_speed(fan_speed)
+                which_led = int( fan_speed / 10 )
+                leds._set_led(which_led, led_color)
+                leds.show()
+        elif res == middle_button:
+            # vol down pressed
+            if fan_speed > 0:
+                which_led = int( fan_speed / 10 )
+                leds._set_led(which_led, (0,0,0)) 
+                leds.show()
+                fan_speed -= 10
+                fc.set_fan_speed(fan_speed)
+        else:
+            # we timed out
+            to_ctr += 1
+
+        sleep(0.05)
+        to_ctr += 1
+
+    # record what happened
+    if to_ctr < timeout_in_seconds:
+        fix_cmd(board_type, "aplay wavs/did_fan_change.wav")
+        fix_cmd(board_type, "aplay wavs/confirm_yesno.wav &")
+
+        res = m2but.wait_buttons( [right_button,middle_button], 10 )
+        if res == right_button:
+            test_passed = True
+
+    else:
+        #print("Error - fan test timed out!")
+        pass
+
+    return test_passed
+
+
 
 ## like 'if main', but no indent required :-)
+start_time = time()
 print("\n\n\n\n\n\n\n\n\n\n\n")
 print("************************************")
 print("** Starting MarkII Hardware Tests **")
@@ -59,6 +171,7 @@ slider_test = fail_tag
 brightness_test = fail_tag
 camera_test = fail_tag
 blue_test = fail_tag
+fan_test = fail_tag
 
 # whats the environment look like?
 if hc.mice[0]['name'] == 'raspberrypi-ts' and hc.screens[0]['name'] == 'vc4drmfb':
@@ -120,32 +233,24 @@ if board_type == 0:
 # we believe we found an sj201   #
 # and we believe we are on a pi4 #
 ##################################
-from utils.async_button import AsyncButtons
-
-BLACK_LED = (0,0,0)
-RED_LED = (255,0,0)
-GREEN_LED = (0,255,0)
-BLUE_LED = (0,0,255)
-
-activate_button = '24'
-right_button = '22'
-middle_button = '23'
 m2but = AsyncButtons()
-
 print("*** %sFound%s %s Style SJ201 ***" % (GREEN,NC,sj201_board_types[board_type]))
-
 if board_type == 1:
     from ledtest_old import Led
+    from old_fan import FanControl
 else:
     from ledtest_new import Led
+    from new_fan import FanControl
 
 leds = Led()
 
 # turn off LEDs
 for x in range(12):
     leds._set_led(x,BLACK_LED)
+leds.show()
 
-lv = LogicalVolume(leds, board_type)
+lv = LogicalVolume(leds, board_type, BLUE_LED)
+fc = FanControl()
 
 #################
 ## Start Tests ##
@@ -169,7 +274,6 @@ if res == -1:
     # if activate pressed 3 times we will remove the csv row and restart the system
 else:
     # we know the activate button is working
-
     ################
     # button tests #
     ################
@@ -195,6 +299,8 @@ else:
     ###############
     # slider test #
     ###############
+    # note - we should leave the mic in the unmuted 
+    # state to reduce strain on our customer svc dept.
     SLIDER_DELAY = 0.5
     SLIDER_TIMEOUT = 20
     # note - 0 is to the left and 1 is to the right
@@ -242,51 +348,32 @@ else:
         slider_test = pass_tag
 
     print("Mic mute/slider test passed = %s" % (slider_test,))
+
+    ###############
+    # volume test #
+    ###############
     print("\nVolume Tests\n------------")
     print("Use the right and middle buttons to change the volume. Press Activate when done")
     fix_cmd(board_type, "aplay wavs/vol_test1.wav")
     fix_cmd(board_type, "aplay wavs/vol_test2.wav")
 
-    ###############
-    # volume test #
-    ###############
-    process = Popen(["speaker-test", "-c2", "-tsin", "-f2000", "&"])
+    for x in range(6):
+        sleep(0.1) # indicates led code neds some attention! don't auto show!
+        leds._set_led(x,BLUE_LED)
+    leds.show()
 
-    to_ctr = 0
-    timeout_in_seconds = 30  # very approximate!
-    while to_ctr < timeout_in_seconds:
-        res = m2but.wait_buttons( [activate_button, right_button, middle_button], 2 )
+    if volume_good(m2but, lv):
+        volume_test = pass_tag
 
-        if res == activate_button:
-            # activate pressed
-            break
-        elif res == right_button:
-            # vol up pressed
-            lv.vol_up()
-        elif res == middle_button:
-            # vol down pressed
-            lv.vol_down()
-        else:
-            # we timed out
-            to_ctr += 1
+    ############
+    # test fan #
+    ############
+    print("Fan Test, use buttons to change fan speed. Press Activate when done.")
+    fix_cmd(board_type, "aplay wavs/change_fan_speed.wav")
+    fix_cmd(board_type, "aplay wavs/activate_to_end.wav")
 
-        sleep(0.05)
-        to_ctr += 1
-
-    # stop sine wav 
-    process.kill()
-
-    # record what happened
-    if to_ctr < timeout_in_seconds:
-        fix_cmd(board_type, "aplay wavs/did_volume_change.wav")
-        fix_cmd(board_type, "aplay wavs/confirm_yesno.wav &")
-
-        res = m2but.wait_buttons( [right_button,middle_button], 10 )
-        if res == right_button:
-            volume_test = pass_tag
-
-    else:
-        print("Error - volume test timed out!")
+    if fan_good(m2but, fc, BLUE_LED, leds):
+        fan_test = pass_tag
 
     #############
     # test LEDs #
@@ -337,15 +424,14 @@ else:
     if tse.got_key:
         touch_screen_working = pass_tag
 
-    sleep(1)
-
     ###############
     # test camera #
     ###############
+    print("Begin Camera Test - Note! make sure the shutter is open!")
     fix_cmd(board_type, "aplay wavs/testing_the_camera.wav")
-    fix_cmd(board_type, "aplay wavs/start_listening.wav")
-    fix_cmd(board_type, "aplay wavs/start_listening.wav")
-    fix_cmd(board_type, "aplay wavs/start_listening.wav &")
+    fix_cmd(board_type, "aplay wavs/click.wav")
+    fix_cmd(board_type, "aplay wavs/click.wav")
+    fix_cmd(board_type, "aplay wavs/click.wav")
     fix_cmd(board_type, "ffmpeg -y -framerate 30 -f v4l2 -video_size 800x480 -i /dev/video0 -ss 00:00:03 -frames:v 1 wtf.jpg")
     os.system("sudo fbi -T 1 -d /dev/fb0 wtf.jpg")
     fix_cmd(board_type, "aplay wavs/camera_click.wav")
@@ -376,6 +462,7 @@ else:
 
 # write test results here
 print("\n          Test Results\n          ------------")
+print(" Serial Number [%s]" % (serial_number,))
 print("            CPU[%s]" % (cpu,))
 print("         Memory[%s]" % (memory,))
 print("        Storage[%s]" % (storage,))
@@ -389,6 +476,7 @@ print("     Brightness[%s]" % (brightness_test,))
 print("      Recording[%s]" % (recording_test,))
 print("         Camera[%s]" % (camera_test,))
 print("      Bluetooth[%s]" % (blue_test,))
+print("            Fan[%s]" % (fan_test,))
 
 # save results to csv file
 csv_data = {
@@ -408,11 +496,12 @@ csv_data = {
     "touch_working":touch_screen_working,
     "camera":camera_test,
     "bluetooth":blue_test,
+    "fan":fan_test,
 }
 
 write_test_results_to_file(csv_data)
 lv.close()
 elapsed = time() - start_time
-print("Took %s Seconds" % (elapsed,))
+print("Took %s Seconds" % ( int( elapsed ),) )
 print("\n\n\n")
 
