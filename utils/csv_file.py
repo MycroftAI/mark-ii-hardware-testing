@@ -17,7 +17,8 @@ csv_line_keys = [
     'recording',
     'touch_working',
     'camera',
-    'bluetooth'
+    'bluetooth',
+    'fan'
 ]
 def write_test_results_to_file(csv_data):
     csv_line = ''
@@ -48,6 +49,7 @@ csv_data = {
     'touch_working':14,
     'camera':15,
     'bluetooth':16,
+    'fan':17,
 }
 
 write_test_results_to_file(csv_data)
