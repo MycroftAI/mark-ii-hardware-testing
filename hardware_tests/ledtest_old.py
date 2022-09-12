@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     colors = [(255,0,0), (255,0,0), (255,0,0)]
     color_index = 0
-    while color_index < 3:
+    while color_index < 1:
         fill_color = colors[color_index]
         leds.brightness = 0.0
         while leds.brightness < 1.0:

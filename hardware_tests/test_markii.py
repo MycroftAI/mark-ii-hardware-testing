@@ -286,6 +286,8 @@ else:
     if res != -1:
         button_right_test = pass_tag
 
+    os.system("killall aplay")
+
     print("Push the Middle button.")
     print("This test will time out after 5 seconds.")
     fix_cmd(board_type, "aplay wavs/button_middle.wav &")
@@ -295,6 +297,7 @@ else:
         button_left_test = pass_tag
 
     # TODO do we have two working buttons?
+    os.system("killall aplay")
 
     ###############
     # slider test #
@@ -317,6 +320,7 @@ else:
         while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '0':
             sleep(SLIDER_DELAY)
             to_ctr += 1
+        os.system("killall aplay")
 
         if to_ctr != SLIDER_TIMEOUT:
             fix_cmd(board_type, "aplay wavs/slide_left.wav &")
@@ -327,13 +331,19 @@ else:
                 to_ctr += 1
             if to_ctr != SLIDER_TIMEOUT:
                 mic_test_passed = True
+        os.system("killall aplay")
+
     else:
+
         fix_cmd(board_type, "aplay wavs/slide_left.wav &")
         print("Slide far left button to the left")
         to_ctr = 0
         while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '1':
             sleep(SLIDER_DELAY)
             to_ctr += 1
+
+        os.system("killall aplay")
+
         if to_ctr != SLIDER_TIMEOUT:
             fix_cmd(board_type, "aplay wavs/slide_right.wav &")
             print("Slide far left button to the right")
@@ -343,6 +353,8 @@ else:
                 to_ctr += 1
             if to_ctr != SLIDER_TIMEOUT:
                 mic_test_passed = True
+
+        os.system("killall aplay")
 
     if mic_test_passed:
         slider_test = pass_tag
@@ -365,6 +377,8 @@ else:
     if volume_good(m2but, lv):
         volume_test = pass_tag
 
+    os.system("killall aplay")
+
     ############
     # test fan #
     ############
@@ -374,6 +388,8 @@ else:
 
     if fan_good(m2but, fc, BLUE_LED, leds):
         fan_test = pass_tag
+
+    os.system("killall aplay")
 
     #############
     # test LEDs #
@@ -391,6 +407,8 @@ else:
     res = m2but.wait_buttons( [right_button,middle_button], 10 )
     if res == right_button:
         brightness_test = pass_tag
+
+    os.system("killall aplay")
 
     ############
     # mic test #
@@ -413,6 +431,8 @@ else:
     else:
         print("Mic test failed energy tests")
 
+    os.system("killall aplay")
+
     #####################
     # touch screen test #
     #####################
@@ -423,6 +443,8 @@ else:
     loop.run_until_complete(tse.main())
     if tse.got_key:
         touch_screen_working = pass_tag
+
+    os.system("killall aplay")
 
     ###############
     # test camera #
@@ -444,6 +466,7 @@ else:
 
     os.system("sudo killall fbi")
     os.system("rm wtf.jpg")
+    os.system("killall aplay")
 
     ##################
     # test bluetooth #
@@ -501,7 +524,11 @@ csv_data = {
 
 write_test_results_to_file(csv_data)
 lv.close()
+
+os.system("chown pi:pi test_results.csv")
+
 elapsed = time() - start_time
+
 print("Took %s Seconds" % ( int( elapsed ),) )
 print("\n\n\n")
 

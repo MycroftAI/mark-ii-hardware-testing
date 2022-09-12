@@ -3,8 +3,8 @@ echo "Testing audio recording"
 LC_ALL=C
 #sleep 1
 
-echo "Recording 5 seconds of audio..."
-arecord -r 16000 -c 2 -f S16_LE -t wav -d 5 > test_stereo_recording.wav
+echo "Recording 3 seconds of audio..."
+arecord -r 16000 -c 2 -f S16_LE -t wav -d 3 > test_stereo_recording.wav
 aplay wavs/you_said.wav
 aplay test_stereo_recording.wav
 echo "Evaluating results..."
