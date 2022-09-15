@@ -278,9 +278,16 @@ else:
     # button tests #
     ################
     print("\nButton Tests\n-----------")
+
+    """
     print("Push the Right button.")
     print("This test will time out after 5 seconds.")
     fix_cmd(board_type, "aplay wavs/button_right.wav &")
+    """
+
+    print("Push the middle button.")
+    fix_cmd(board_type, "aplay wavs/button_middle.wav &")
+
     buttons = [right_button,]
     res = m2but.wait_buttons(buttons, 10)
     if res != -1:
@@ -288,9 +295,14 @@ else:
 
     os.system("killall aplay")
 
+    """
     print("Push the Middle button.")
     print("This test will time out after 5 seconds.")
     fix_cmd(board_type, "aplay wavs/button_middle.wav &")
+    """
+    print("Push the left button.")
+    fix_cmd(board_type, "aplay wavs/button_left.wav &")
+
     buttons = [middle_button,]
     res = m2but.wait_buttons(buttons, 10)
     if res != -1:
@@ -306,16 +318,17 @@ else:
     # state to reduce strain on our customer svc dept.
     SLIDER_DELAY = 0.5
     SLIDER_TIMEOUT = 20
-    # note - 0 is to the left and 1 is to the right
-    # we assume 1 is muted and 0 is not muted
-    mic_is_muted = False
-    if '1' == m2but.get_mic_switch():
-        mic_is_muted = True
+    # note - 0 is to the right and 1 is to the left
+    # we assume 0 is not muted and 1 is muted
+    mic_is_muted = True
+    if '0' == m2but.get_mic_switch():
+        mic_is_muted = False
 
     mic_test_passed = False
+
     if not mic_is_muted:
-        fix_cmd(board_type, "aplay wavs/slide_right.wav &")
-        print("Slide far left button to the right")
+        fix_cmd(board_type, "aplay wavs/slide_slider_left.wav &")
+        print("Slide the slider to the left")
         to_ctr = 0
         while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '0':
             sleep(SLIDER_DELAY)
@@ -323,8 +336,8 @@ else:
         os.system("killall aplay")
 
         if to_ctr != SLIDER_TIMEOUT:
-            fix_cmd(board_type, "aplay wavs/slide_left.wav &")
-            print("Slide far left button to the left")
+            fix_cmd(board_type, "aplay wavs/slide_slider_right.wav &")
+            print("Slide the slider to the right")
             to_ctr = 0
             while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '1':
                 sleep(SLIDER_DELAY)
@@ -335,8 +348,8 @@ else:
 
     else:
 
-        fix_cmd(board_type, "aplay wavs/slide_left.wav &")
-        print("Slide far left button to the left")
+        fix_cmd(board_type, "aplay wavs/slide_slider_right.wav &")
+        print("Slide the slider to the right")
         to_ctr = 0
         while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '1':
             sleep(SLIDER_DELAY)
@@ -345,16 +358,24 @@ else:
         os.system("killall aplay")
 
         if to_ctr != SLIDER_TIMEOUT:
-            fix_cmd(board_type, "aplay wavs/slide_right.wav &")
-            print("Slide far left button to the right")
+            fix_cmd(board_type, "aplay wavs/slide_slider_left.wav &")
+            print("Slide the slider to the left")
             to_ctr = 0
             while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '0':
                 sleep(SLIDER_DELAY)
                 to_ctr += 1
             if to_ctr != SLIDER_TIMEOUT:
-                mic_test_passed = True
-
-        os.system("killall aplay")
+                os.system("killall aplay")
+                # need to slide back to unmuted position here
+                fix_cmd(board_type, "aplay wavs/slide_slider_right.wav &")
+                print("Slide the slider to the right")
+                to_ctr = 0
+                while to_ctr < SLIDER_TIMEOUT and m2but.get_mic_switch() == '1':
+                    sleep(SLIDER_DELAY)
+                    to_ctr += 1
+                os.system("killall aplay")
+                if to_ctr != SLIDER_TIMEOUT:
+                    mic_test_passed = True
 
     if mic_test_passed:
         slider_test = pass_tag
