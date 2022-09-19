@@ -386,12 +386,12 @@ else:
     # volume test #
     ###############
     print("\nVolume Tests\n------------")
-    print("Use the right and middle buttons to change the volume. Press Activate when done")
+    print("Use the buttons to change the volume. Press Activate when done")
     fix_cmd(board_type, "aplay wavs/vol_test1.wav")
     fix_cmd(board_type, "aplay wavs/vol_test2.wav")
 
     for x in range(6):
-        sleep(0.1) # indicates led code neds some attention! don't auto show!
+        sleep(0.1) # indicates led code needs some attention! don't auto show!
         leds._set_led(x,BLUE_LED)
     leds.show()
 
