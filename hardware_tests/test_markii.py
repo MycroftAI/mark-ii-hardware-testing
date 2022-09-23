@@ -10,6 +10,10 @@ from utils.csv_file import write_test_results_to_file
 from utils.utils import CommandExecutor, fix_cmd, LogicalVolume, GREEN, RED, NC
 from utils.async_touch import TouchEvent
 from utils.async_button import AsyncButtons
+import png
+import pyqrcode
+from pyqrcode import QRCode
+
 """
    MarkII Production Hardware Test Program
 
@@ -279,12 +283,6 @@ else:
     ################
     print("\nButton Tests\n-----------")
 
-    """
-    print("Push the Right button.")
-    print("This test will time out after 5 seconds.")
-    fix_cmd(board_type, "aplay wavs/button_right.wav &")
-    """
-
     print("Push the middle button.")
     fix_cmd(board_type, "aplay wavs/button_middle.wav &")
 
@@ -295,11 +293,6 @@ else:
 
     os.system("killall aplay")
 
-    """
-    print("Push the Middle button.")
-    print("This test will time out after 5 seconds.")
-    fix_cmd(board_type, "aplay wavs/button_middle.wav &")
-    """
     print("Push the left button.")
     fix_cmd(board_type, "aplay wavs/button_left.wav &")
 
@@ -545,11 +538,20 @@ csv_data = {
 
 write_test_results_to_file(csv_data)
 lv.close()
-
 os.system("chown pi:pi test_results.csv")
 
 elapsed = time() - start_time
-
 print("Took %s Seconds" % ( int( elapsed ),) )
 print("\n\n\n")
+
+# QR code stuff
+qrcode_filename = "saved_qr.png"
+os.system("sudo rm %s" % (qrcode_filename,))
+s = "%s" % (serial_number,)
+qr = pyqrcode.create(s)
+# save the file named "saved_qr.png"
+qr.png(qrcode_filename, scale = 6)
+sleep(5)
+fix_cmd(board_type, "aplay wavs/start_listening.wav")
+os.system("sudo fbi -T 1 -d /dev/fb0 %s" % (qrcode_filename,))
 
