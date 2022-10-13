@@ -33,7 +33,6 @@ to the device. See HERE for instructions.
 
     git clone https://github.com/MycroftAI/mark-ii-hardware-testing.git
     cd mark-ii-hardware-testing
-    git checkout bug_fix
 
 
 3) Copy files to the MarkII
@@ -57,17 +56,40 @@ to the device. See HERE for instructions.
 In other words turn on i2s and turn off the default audio device
 See Note(2) below.
 
+5) NOTE - the hardware image is bootable and should be ready to go.
+If you boot and ssh into it you can run the default production hardware 
+tests like this 
 
-5) Edit file .bashrc and add these lines to the end of the file
+bash init_hardware.sh
+bash run_tests.sh
+
+At this point you can create a basic production hardware test image or you
+can create a component level bootable image. The only difference is the 
+commands we run from the .bashrc file on startup.
+
+To Create a Basic Production test image ...
+
+Edit file .bashrc and add these lines to the end of the file
 
 bash /home/pi/init_hardware.sh
 bash /home/pi/run_tests.sh
 
 This file is located at /home/pi/.bashrc
 
+To Create a Component test image ...
+
+Edit file .bashrc and add these lines to the end of the file
+
+bash /home/pi/init_hardware.sh
+bash /home/pi/run_my_tests.sh
+
+Where "my_tests.sh" is a script which will run your component level test. 
+For an example, see the touch screen and camera component test.
+
+This file is located at /home/pi/.bashrc
 
 6) Reboot - the MarkII should boot into test mode
-(power off or sudo shutdown -r now)
+(power off the device, or from the command line "sudo shutdown -r now")
 
 
 7) To test the audio path run 'arecord junk.wav' then 'aplay junk.wav' 
@@ -78,6 +100,8 @@ Notes:
        This is because if it does not find the python environment (located at
        /home/pi/venv/) it will create it and this can take some time. Subsequent
        reboots will detect the presence of the venv/ dir and boot much faster.
+       Also, if you add component tests which require additional modules you
+       should add them to the requirements.txt file.
 
     2) you will need to use sudo so 
    

@@ -1,3 +1,5 @@
+import os
+
 """
 csv file format
 """
@@ -28,8 +30,13 @@ def write_test_results_to_file(csv_data):
     csv_line = csv_line[:-1]
     csv_line += '\n'
     #print(csv_line)
-    with open('test_results.csv', 'a') as file_handle:
-        file_handle.write(csv_line)
+
+    file_handle = open('test_results.csv', 'a')
+    file_handle.write(csv_line)
+    file_handle.flush()
+    file_handle.close()
+    os.sync()
+
 
 """
 csv_data = { 
