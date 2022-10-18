@@ -3,7 +3,7 @@ echo "Testing audio recording"
 LC_ALL=C
 #sleep 1
 
-echo "Recording 3 seconds of audio..."
+echo "Recording 10 seconds of audio..."
 su pi -c 'arecord -r 16000 -c 2 -f S16_LE -t wav -d 10 > test_stereo_recording.wav'
 su pi -c 'aplay wavs/you_said.wav'
 su pi -c 'aplay test_stereo_recording.wav'
