@@ -538,7 +538,7 @@ csv_data = {
 
 write_test_results_to_file(csv_data)
 lv.close()
-os.system("chown pi:pi test_results.csv")
+#os.system("chown pi:pi test_results.csv")
 
 elapsed = time() - start_time
 print("Took %s Seconds" % ( int( elapsed ),) )
