@@ -13,6 +13,7 @@ from utils.async_button import AsyncButtons
 import png
 import pyqrcode
 from pyqrcode import QRCode
+from wifi_test import run_cmd
 
 """
    MarkII Production Hardware Test Program
@@ -176,6 +177,7 @@ brightness_test = fail_tag
 camera_test = fail_tag
 blue_test = fail_tag
 fan_test = fail_tag
+wifi_test = fail_tag
 
 # whats the environment look like?
 if hc.mice[0]['name'] == 'raspberrypi-ts' and hc.screens[0]['name'] == 'vc4drmfb':
@@ -497,6 +499,24 @@ else:
     if m2but.key_gpio == activate_button:
         blue_test = pass_tag
 
+    err1 = run_cmd("iwconfig wlan0", "find", "Tx-Pow")
+    if err1:
+        print("Error finding transmit power")
+
+    err2 = run_cmd("nmcli dev status | grep wlan0", "start", "wlan0")
+    if err2:
+        print("Error finding device")
+
+    err3 = run_cmd("ifconfig | grep wlan0", "start", "wlan0")
+    if err3:
+        print("Error finding transmit power")
+    if err1 or err2 or err3:
+        print("Error WIFI Failed!")
+    else:
+        wifi_test = pass_tag
+
+
+
 # write test results here
 print("\n          Test Results\n          ------------")
 print(" Serial Number [%s]" % (serial_number,))
@@ -514,6 +534,7 @@ print("      Recording[%s]" % (recording_test,))
 print("         Camera[%s]" % (camera_test,))
 print("      Bluetooth[%s]" % (blue_test,))
 print("            Fan[%s]" % (fan_test,))
+print("           WiFi[%s]" % (wifi_test,))
 
 # save results to csv file
 csv_data = {
@@ -534,6 +555,7 @@ csv_data = {
     "camera":camera_test,
     "bluetooth":blue_test,
     "fan":fan_test,
+    "wifi":wifi_test,
 }
 
 write_test_results_to_file(csv_data)
