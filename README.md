@@ -124,6 +124,10 @@ Notes:
        automatically on reboot so you don't need to worry about this.
 
 
+Warning - the wifi test uses Network Manager which is not installed by default.
+You will need to uninstall connman and install network manager. then you will 
+need to disable the dhcpcp service.
+
 
 MANIFEST
 --------
